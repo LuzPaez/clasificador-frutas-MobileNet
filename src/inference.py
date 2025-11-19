@@ -1,0 +1,1 @@
+#archivo inference ruta : src > inference.py

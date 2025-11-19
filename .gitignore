@@ -205,3 +205,13 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+
+# No subir imágenes temporales
+uploads/
+# No subir dataset
+data/fruits_dataset/
+# No subir entorno virtual
+venv/
+# No subir cachés
+__pycache__/

@@ -1,14 +1,88 @@
-// archivo html ruta : app> templates > index.html
-// archivos css ruta : app> templates
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Clasificador de Frutas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
+    <title>Clasificador de Frutas 🍑</title>
 </head>
+
 <body>
-  
+
+<div class="container">
+    <h2>Clasificador de Frutas 🍎🍓🍑</h2>
+    
+    <label class="upload-box" for="file-input">
+        📸 Haz clic para subir una imagen
+    </label>
+
+    <input type="file" id="file-input" accept="image/*" style="display:none">
+
+    <img id="preview">
+
+    <button id="btnPredict">Clasificar</button>
+
+    <p id="loading">⏳ Analizando imagen...</p>
+
+    <div id="result-card">
+        <h3 id="result-title"></h3>
+        <p id="result-confidence"></p>
+    </div>
+</div>
+
+
+<script>
+    const fileInput = document.getElementById("file-input");
+    const preview = document.getElementById("preview");
+    const btnPredict = document.getElementById("btnPredict");
+    const loading = document.getElementById("loading");
+    const resultCard = document.getElementById("result-card");
+
+    // Vista previa
+    fileInput.addEventListener("change", () => {
+        const file = fileInput.files[0];
+        if (file) {
+            preview.src = URL.createObjectURL(file);
+            preview.style.display = "block";
+        }
+    });
+
+    // Enviar imagen a Flask
+    btnPredict.addEventListener("click", () => {
+        if (!fileInput.files[0]) {
+            alert("Por favor selecciona una imagen.");
+            return;
+        }
+
+        loading.style.display = "block";
+        resultCard.style.display = "none";
+
+        let formData = new FormData();
+        formData.append("file", fileInput.files[0]);
+
+        fetch("/predict", {
+            method: "POST",
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+            loading.style.display = "none";
+            resultCard.style.display = "block";
+
+            if (data.confianza * 100 < 70){
+                document.getElementById("result-title").textContent = "Resultado: " + " No es una fruta reconocible";
+            }else{
+                document.getElementById("result-title").textContent = "Resultado: " + data.clase;
+            }
+            document.getElementById("result-confidence").textContent = "Confianza: " + (data.confianza * 100).toFixed(2) + "%";
+        })
+        .catch(err => {
+            loading.style.display = "none";
+            alert("Error en la clasificación.");
+        });
+    });
+</script>
+
 </body>
 </html>
+

@@ -1,0 +1,128 @@
+        
+        /* Estilos del body*/
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(135deg, #89c5fe, #ff6699);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Estilos del contendor principal*/
+        .container {
+            width: 850px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            gap: 20px; 
+        }
+
+        /* Estilo del titulo "Clasificador de frutas"*/
+        h2 {
+            font-size: 45px;
+            font-weight: 700;
+            margin: 0;
+            padding-bottom: 10px;
+        }
+
+        /* Estilo de la caja para subir imagen*/
+
+        .upload-box {
+            border: 2px dashed #ffffff;
+            padding: 25px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 60%;
+            align-self: center;
+            font-size: 25px;
+        }
+
+        .upload-box:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Estilos de la imagen*/
+
+        #preview {
+            max-width: 400px;
+            max-height: 400px;
+            object-fit: contain;  
+            margin-top: 20px;
+            border-radius: 15px;
+            display: none;
+            align-self: center;
+            background: rgba(255, 255, 255, 0.349);
+            padding: 10px;
+        }
+
+        /* Estilos del botón de "clasificar"*/
+
+        button {
+            width: 250px;
+            padding: 15px;
+            background: linear-gradient(135deg, #9785e5, #72f39d);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: 600;
+            align-self: center;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background: #e3e3e3;
+            color: #333;
+        }
+
+        /* Estilo del contendeor de resultados */
+        #result-card {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 15px;
+            display: none;
+            animation: fadeIn 0.6s ease-in-out;
+            width: 70%;
+            align-self: center;
+        }
+        
+        /* Estilos del Loading la cual dura poco */
+
+        #loading {
+            display: none;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Tamaño del titulo clasificador de frutas*/
+        label{
+          font-size: 30px;
+          align-self: center;
+        }
+
+        /* Tamaño de resultado predicción*/
+        #result-title{
+          font-size: 25px;
+        }
+
+        /* Tamaño de resultado confianza*/
+        #result-confidence{
+          font-size: 25px;
+        }
